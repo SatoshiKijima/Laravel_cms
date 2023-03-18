@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use Validator;  //この1行だけ追加！
+use Validator; 
 
-class RegisteredUserController extends Controller
+class SupportRegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.supregister');
     }
 
     /**
@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
             //バリデーション
         $validator = Validator::make($request->all(), [
@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
                 ->withErrors($validator);
         }
         
-        $users = new user;
+        $users = new supportuser;
         $users -> name = $request->name;
         $users -> email = $request->email;
         $users -> password = Hash::make($request->password);
@@ -60,6 +60,5 @@ class RegisteredUserController extends Controller
         $users -> save();
         return redirect('/');
         
-    
     }
 }

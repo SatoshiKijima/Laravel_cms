@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
         $birthday = $faker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
         $gender = $faker->randomElement(['male', 'female']);
         $email = $faker->unique()->safeEmail;
-        $password = Hash::make('password');
+        $password = Hash::make(1);
         
         User::create([
             'name' => $faker->name($gender),
