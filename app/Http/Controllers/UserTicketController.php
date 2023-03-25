@@ -1,26 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Models\SupportUser;
-use Illuminate\Http\RedirectResponse;
+use App\Models\UserTicket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use App\Models\Ticket;  
 
-
-class SupUserController extends Controller
+class UserTicketController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('supmypage');
+        $tickets = Ticket::with(['product', 'area', 'giftcard'])
+        ->orderBy('created_at', 'desc')
+        ->paginate(12);
+        return view('ticket', ['tickets' => $tickets]);
     }
 
     /**
@@ -47,21 +45,21 @@ class SupUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SupUser  $supuser
+     * @param  \App\Models\UserTicket  $userTicket
      * @return \Illuminate\Http\Response
      */
-    public function show(SupUser $supuser)
+    public function show(UserTicket $userTicket)
     {
-        //
+        return view('ticketdetail');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SupUser  $supuser
+     * @param  \App\Models\UserTicket  $userTicket
      * @return \Illuminate\Http\Response
      */
-    public function edit(SupUser $supuser)
+    public function edit(UserTicket $userTicket)
     {
         //
     }
@@ -70,10 +68,10 @@ class SupUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SupUser  $supuser
+     * @param  \App\Models\UserTicket  $userTicket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SupUser $supuser)
+    public function update(Request $request, UserTicket $userTicket)
     {
         //
     }
@@ -81,10 +79,10 @@ class SupUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SupUser  $supuser
+     * @param  \App\Models\UserTicket  $userTicket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SupUser $supuser)
+    public function destroy(UserTicket $userTicket)
     {
         //
     }

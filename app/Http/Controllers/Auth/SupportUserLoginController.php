@@ -3,41 +3,36 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\LoginRequest; // 修正
+use App\Models\SupportUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use App\Models\User;
-use App\Models\SupportUser;
 
-class AuthenticatedSessionController extends Controller
+class SupportUserLoginController extends Controller
 {
     /**
      * Display the login view.
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.suplogin');
     }
-    
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request): RedirectResponse // 修正
     {
         $validated = $request->validated();
 
-        $user = User::where('email', $validated['email'])->first();
+        $supportUser = SupportUser::where('email', $validated['email'])->first();
 
-        if ($user && \Hash::check($validated['password'], $user->password)) {
-            Auth::login($user);
-
+        if ($supportUser && \Hash::check($validated['password'], $supportUser->password)) {
+            Auth::login($supportUser);
             $request->session()->regenerate();
-
-            return redirect()->intended('/user/home');
+            return redirect()->intended('/supuser/home');
         }
 
         return back()->withErrors([
@@ -50,7 +45,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('support_user')->logout();
 
         $request->session()->invalidate();
 

@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
         $users -> birthday = $request->birthday; // 誕生日情報
         $users -> gender = $request->gender; // 性別情報
         $users -> save();
-        return redirect('/');
+        return redirect('/usergate')->with('success', 'ユーザー登録完了しました。ログインしてください。');
         
     
     }
