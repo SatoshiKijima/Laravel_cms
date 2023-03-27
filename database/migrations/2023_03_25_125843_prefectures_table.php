@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_tickets', function (Blueprint $table) {
+        Schema::create('prefectures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('support_user_id');
-            $table->foreign('support_user_id')->references('id')->on('support_users')->onDelete('cascade');
-            $table->unsignedBigInteger('ticket_id');
-            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
-            $table->integer('use')->nullable();
+            $table->string('pref_name');;
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('prefectures');
     }
 };

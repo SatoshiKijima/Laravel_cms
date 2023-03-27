@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Prefecture;
+use App\Models\UserTicket;
+use App\Models\User;
 
 
 class Ticket extends Model
@@ -29,10 +31,15 @@ class Ticket extends Model
     
     public function user()
     {
-    return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
     public function prefecture()
     {
-    return $this->belongsTo(Prefecture::class, 'area_id');
+        return $this->belongsTo(Prefecture::class, 'area_id');
+    }
+    
+    public function userTickets()
+    {
+        return $this->hasMany('App\Models\UserTicket');
     }
 }

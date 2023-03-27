@@ -39,7 +39,24 @@ class UserTicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'ticket_id' => 'required|integer',
+        ]);
+    
+        $ticket = Ticket::findOrFail($validated['ticket_id']);
+    
+        if ($ticket->use == 1) {
+            return back()->withErrors([
+                'ticket_id' => 'すでに取得されたチケットです。',
+            ]);
+        }
+    
+        $ticket->use = 1;
+        $ticket->obtained_at = Carbon::now();
+        $ticket->user_id = Auth::id();
+        $ticket->save();
+    
+        return redirect()->route('myticket');
     }
 
     /**
@@ -73,7 +90,22 @@ class UserTicketController extends Controller
      */
     public function update(Request $request, UserTicket $userTicket)
     {
-        //
+        $validated = $request->validate([
+        'ticket_id' => 'required|integer',
+        ]);
+    
+        $ticket = Ticket::findOrFail($validated['ticket_id']);
+    
+        if ($ticket->use != 1) {
+            return back()->withErrors([
+                'ticket_id' => 'このチケットはまだ取得されていません。',
+            ]);
+        }
+    
+        $ticket->use = 2;
+        $ticket->save();
+    
+        return redirect()->route('ticket_index');
     }
 
     /**
@@ -86,4 +118,22 @@ class UserTicketController extends Controller
     {
         //
     }
+    
+    public function myticket(Request $request)
+    {
+        $user = auth()->user(); // ログインユーザーの取得
+        $tickets = Ticket::with(['product', 'area', 'giftcard'])
+                    ->whereIn('id', function($query) use ($user) {
+                        $query->select('ticket_id')
+                              ->from('user_tickets')
+                              ->where('user_id', $user->id)
+                              ->where('use', 1);
+                    })
+                    ->orderBy('created_at', 'asc')
+                    ->paginate(16);
+        return view('myticket', [
+            'tickets' => $tickets,
+        ]);
+}
+
 }

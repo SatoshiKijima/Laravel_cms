@@ -2,9 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('supportuser.login') }}">
+    <form method="POST" action="{{ route('supportuser_login') }}">
         @csrf
-
+        
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -46,12 +46,12 @@
     </form>
 </x-guest-layout>
 
-@if (Route::has('supportuser.login'))
+@if (Route::has('supportuser_login'))
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
         @auth
-            <a href="{{ url('/supuser/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
         @else
-            <a href="{{ route('supportuser.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a
+            <a href="{{ route('supportuser_login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a
             
             @if (Route::has('supuser_register'))
                 <a href="{{ route('supuser_register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">支援希望ユーザー登録</a>

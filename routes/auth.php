@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SupportRegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SupportUserLoginController;
+use App\Http\Middleware\SupportUserMiddleware;
+
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -22,6 +25,11 @@ Route::middleware('guest')->group(function () {
                 ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    
+    Route::get('/suplogin', [SupportUserLoginController::class, 'create'])
+                ->name('supportuser_login');
+
+    Route::post('/suplogin', [SupportUserLoginController::class, 'store']);
     
     Route::get('supuser_register', [SupportRegisteredUserController::class, 'create'])
                 ->name('supuser_register');

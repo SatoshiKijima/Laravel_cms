@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <header class="text-gray-600 body-font">
+         <header class="text-gray-600 body-font">
           <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
               <a class="mr-5 hover:text-gray-900">First Link</a>
@@ -27,21 +27,20 @@
               <span class="ml-3 text-xl">Tailblocks</span>
             </a>
             <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-              <button class="inline-flex items-left bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ログインorユーザー登録
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </button>
+                @auth
+                    <a href="{{ route('support_home') }}" class="inline-flex items-left bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Dashboard</a>
+                @else
+                    <a href="{{ route('supportuser_login') }}" class="inline-flex items-left bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ログインorユーザー登録</a>
+                @endauth
             </div>
           </div>
         </header>
-    </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('supportuser_login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                <a href="{{ route('supuser_home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                <a href="{{ route('support_home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
             @else
                 <a href="{{ route('supportuser_login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a>
                 @if (Route::has('supuser_register'))

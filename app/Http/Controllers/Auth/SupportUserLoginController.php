@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Http\Middleware\SupportUserMiddleware;
+
+
 
 class SupportUserLoginController extends Controller
 {
@@ -30,9 +33,9 @@ class SupportUserLoginController extends Controller
         $supportUser = SupportUser::where('email', $validated['email'])->first();
 
         if ($supportUser && \Hash::check($validated['password'], $supportUser->password)) {
-            Auth::login($supportUser);
+            Auth::guard('supportusers')->login($supportUser);
             $request->session()->regenerate();
-            return redirect()->intended('/supuser/home');
+            return redirect()->intended('/support/home');
         }
 
         return back()->withErrors([

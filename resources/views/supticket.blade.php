@@ -118,7 +118,15 @@
                 <p class="text-lg font-medium mb-2">{{ $ticket->product->product_name }}-{{ $ticket->product->price }}円</p>
                 <p class="text-lg font-medium mb-2">エリア:{{ $ticket->area->pref_name }}</p>
                 <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->giftcard->card_name }}" class="h-32 w-auto mb-2">
-                <p class="text-lg font-medium mb-2">{{ $ticket->message }}</p>
+                <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                @if ($ticket->use == 1)
+                        ステータス:取得済
+                    @elseif ($ticket->use == 2)
+                        ステータス:利用済
+                    @else ステータス:
+                    @endif
+                </div>
+                <p class="text-lg font-medium mb-2">メッセージ: {{ mb_substr($ticket->message, 0, 20) }}</p>
                 <div class="flex">
                     <a href="{{ route('supticket_edit', $ticket->id)}}" class="mr-2 text-blue-500 hover:text-blue-700">編集</a>
                     <form action="{{ route('supticket_delete',  ['ticket' => $ticket->id]) }}" method="POST" onsubmit="return confirm('本当に削除してよろしいですか？');">

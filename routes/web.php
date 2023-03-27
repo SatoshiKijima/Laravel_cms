@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SupUserController;
+use App\Http\Controllers\SupportUserController;
 use App\Http\Controllers\Auth\SupportRegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TicketController;
@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserGateController;
 use App\Http\Controllers\UserTicketController;
 use App\Http\Controllers\Auth\SupportUserLoginController;
+use App\Http\Middleware\SupportUserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,20 +48,37 @@ Route::get('/', function () {
 });
 Route::get('/usergate', [UserGateController::class, 'index'])->name('giftcards_index');
 
+
+Route::middleware(['guest:supportusers'])->group(function () {
+        Route::get('/suplogin', [SupportUserLoginController::class, 'create'])->name('supportuser_login');
+        Route::post('/suplogin', [SupportUserLoginController::class, 'store']);
+    });
+    
+Route::middleware(['auth:supportusers', 'supportuser', 'supportuser'])->group(function () {
+    Route::get('/support/home', [SupportUserController::class, 'index'])
+        ->name('support_home');    
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        if (Auth::user()->is_support) {
+            return view('support_dashboard');
+        } else {
+            return view('dashboard');
+        }
     })->name('dashboard');
+    
+    //ログイン後のマイページ
+    Route::get('/user/home', [UserController::class, 'index'])->name('user_home');
+    
+    
 
     Route::middleware('guest')->group(function () {
         Route::get('/login', [LoginController::class, 'store'])->name('login');
         Route::post('/login', [LoginController::class, 'create']);
     });
     
-    Route::middleware(['guest:supportusers', 'web'])->group(function () {
-        Route::get('/supplogin', [SupportUserLoginController::class, 'create'])->name('supportuser_login');
-        Route::post('/supplogin', [SupportUserLoginController::class, 'store']);
-    });
+    
     
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -70,10 +88,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-//ログイン後のマイページ
-Route::get('/user/home', [UserController::class, 'index'])->name('user_home');
 
-Route::get('/supuser/home', [SupUserController::class, 'index'])->name('supuser_home');
 
 
 // 支援ユーザーみらいチケット用のルート
@@ -90,6 +105,10 @@ Route::post('/supuser/suptickets/edit/{ticket}',[TicketController::class,"edit"]
 Route::get('/supuser/suptickets/edit/{ticket}',[TicketController::class,"edit"])->name('supticket_editor'); //通常
 Route::post('/supuser/suptickets/update',[TicketController::class,"update"])->name('supticket_update');
 Route::delete('/supuser/suptickets/{ticket}', [TicketController::class, "destroy"])->name('supticket_delete')->where('ticket', '[0-9]+');
+Route::get('/user/myticket', [TicketController::class, "myticket"])->name('myticket_index');
+Route::post('user//myticket/use/{ticket}', [TicketController::class, "useTicket"])->name('myticket_use');
+Route::post('user//myticket/used/{ticket}', [TicketController::class, "usedTicket"])->name('myticket_used');
+
 
     
     // giftcard選択ルート
@@ -108,6 +127,12 @@ Route::get('/user/tickets/edit/{ticket}',[UserTicketController::class,"edit"])->
 Route::post('/user/tickets/update',[UserTicketController::class,"update"])->name('ticket_update');
 Route::delete('/user/tickets/{ticket}', [UserTicketController::class, "destroy"])->name('ticket_delete')->where('ticket', '[0-9]+');
 
+//ticketをuserが取得した場合のticket_table処理
+Route::post('/tickets/get', [TicketController::class, 'get'])->middleware('auth')->name('tickets.get');
 
+//ticketをuserが取得した場合の処理
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/myticket', [UserTicketController::class, 'myticket'])->name('myticket');
+// });
 
 require __DIR__.'/auth.php';
