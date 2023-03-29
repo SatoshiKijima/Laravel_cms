@@ -64,10 +64,11 @@ return [
         ],
 
         'daily' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14,
+                'driver' => 'daily',
+                'path' => storage_path('logs/laravel.log'),
+                'level' => env('LOG_LEVEL', 'debug'),
+                'days' => 14, // 14日分のログを保持
+        
         ],
 
         'slack' => [
@@ -118,5 +119,5 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
     ],
-
+    
 ];

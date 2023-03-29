@@ -233,17 +233,32 @@ class TicketController extends Controller
     
     public function updateUsed(Request $request)
     {
+        
         $userTicket = UserTicket::where('id', $request->id)->first();
-    
+
         if ($userTicket) {
             $userTicket->use = 2;
-            $userTicket->used_date = now();
+            if (!$userTicket->used_date) {
+                $userTicket->used_date = now();
+            }
             $userTicket->save();
-    
+        
             $ticket = Ticket::where('id', $userTicket->ticket_id)->first();
             if ($ticket) {
                 $ticket->use = 2;
+                if (!$ticket->used_date) {
+                    $ticket->used_date = now();
+                }
                 $ticket->save();
+        
+                // user_ticket tableの更新
+                $userTicketData = [
+                    'ticket_id' => $userTicket->ticket_id,
+                    'user_id' => auth()->user()->id,
+                    'use' => 2,
+                    'used_date' => $ticket->used_date,
+                ];
+                UserTicket::updateOrCreate(['ticket_id' => $userTicket->ticket_id, 'user_id' => auth()->user()->id], $userTicketData);
             }
             return redirect()->back()->with('success', 'チケットを使用済みに更新しました。');
         } else {

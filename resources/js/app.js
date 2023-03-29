@@ -18,3 +18,10 @@ flatpickr(".flatpickr", {
   dateFormat: dateFormat,
   maxDate: new Date(),
 });
+
+const menuBtn = document.querySelector('nav a');
+const menu = document.querySelector('#menu');
+
+menuBtn.addEventListener('click', () => {
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+});

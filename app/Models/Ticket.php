@@ -8,14 +8,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Prefecture;
+use App\Models\GiftCard;
+use App\Models\Product;
 use App\Models\UserTicket;
 use App\Models\User;
 
 
 class Ticket extends Model
 {
+    
+    protected $with = ['product'];
+    
     public function product()
     {
+        
         return $this->belongsTo(Product::class);
     }
 

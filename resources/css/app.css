@@ -1,7 +1,58 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
 
 .custom-mb-4 {
   margin-bottom: 250px; /* または、適切なサイズに設定 */
 }
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #666;
+}
+
+#menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#menu li {
+  margin-bottom: 10px;
+}
+
+#menu a {
+  text-decoration: none;
+  color: #333;
+}
+
+#menu a:hover {
+  color: #666;
+}
+

@@ -11,9 +11,11 @@ use App\Models\Ticket;
 use App\Http\Controllers\GiftCardController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserGateController;
+use App\Http\Controllers\TicketSendController;
 use App\Http\Controllers\UserTicketController;
 use App\Http\Controllers\Auth\SupportUserLoginController;
 use App\Http\Middleware\SupportUserMiddleware;
+use App\Http\Controllers\QrCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +114,7 @@ Route::post('user//myticket/used/{ticket}', [TicketController::class, "usedTicke
 
     
     // giftcard選択ルート
-Route::get('/giftcards', [GiftCardController::class, 'index'])->name('giftcards_index');
+Route::get('/giftcards', [GiftCardController::class, 'index'])->name('giftcards_data');
 Route::post('/giftcards', [GiftCardController::class, 'store'])->name('giftcards_store');
 
 Route::resource('/user/tickets', UserTicketController::class)->names([
@@ -134,5 +136,15 @@ Route::post('/tickets/get', [TicketController::class, 'get'])->middleware('auth'
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/myticket', [UserTicketController::class, 'myticket'])->name('myticket');
 // });
+
+//ticketをuserが取得した場合のticket_table処理
+// Route::post('/user/myticket/email/form', [TicketSendController::class, 'ticketsend'])->middleware('auth')->name('ticket_mailform');
+Route::GET('/user/myticket/email/form/email', [TicketSendController::class, 'send_announce'])->middleware('auth')->name('ticket_post_announce');
+Route::post('/user/myticket/email/form/email/update', [TicketSendController::class, 'send'])->middleware('auth')->name('ticket_email_update');
+Route::get('/user/myticket/email/form', [TicketSendController::class, 'ticketsend'])->name('ticket_mailform');
+Route::post('/user/myticket/email/content', [TicketSendController::class, 'ticketcontent'])->name('ticket_email_content');
+
+
+Route::get('/qrcode', [QrCodeController::class, 'index']);
 
 require __DIR__.'/auth.php';
