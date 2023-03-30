@@ -39,7 +39,7 @@
             <div class="ticket-info p-4">
                 <p class="font-bold">{{ $ticket->gift_sender }} さんからのみらいチケット(PokeGif)</p>
                 <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->giftcard }}" class="h-64 w-full object-cover" width="280" height="210">
-                <p class="border-2 border-pink-500 p-4 my-4">{{ chunk_split($ticket->message, 15) }}</p>
+                <p class="border-2 border-pink-500 p-4 my-4" style="white-space: pre-line">{{ $ticket->message }}</p>
                 <p class="font-bold text-xl text-pink-500 mb-2">{{ $product_name }}</p>
                 <p class="text-pink-500 text-xl mb-2">みらいチケット：{{ $price }}円</p>
                 <p class="text-gray-500 limit-date">有効期限: {{ date('Y年m月d日', strtotime($ticket->get_date . '+3 months')) }}</p>

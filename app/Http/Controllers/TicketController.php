@@ -20,7 +20,7 @@ class TicketController extends Controller
      */
         public function index(Request $request)
         {   
-            // dd(auth('supportusers')->user());//ユーザーメソッド
+            // dd(auth('supportusers')->user());//ユーザーメソッド/
             $user = auth('supportusers')->user(); // ログインユーザーの取得
             $products = DB::table('products')->select('id', 'product_name','price')->get();
             $prefectures = DB::table('prefectures')->select('id', 'pref_name')->get();
@@ -29,6 +29,8 @@ class TicketController extends Controller
             ->where('support_user_id', $user->id) // ログインユーザーのチケットのみ取得
             ->orderBy('created_at', 'asc')
             ->paginate(16);
+            
+            // dd(auth('supportusers')->user());
             return view('supticket', [
                 
             'tickets' => $tickets,

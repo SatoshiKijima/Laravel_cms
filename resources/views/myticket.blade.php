@@ -50,11 +50,14 @@
         <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->giftcard->card_name }}" width="200" height="133">
       </div>
     </div>
-    <form method="GET" action="{{ route('ticket_mailform') }}">
-      @csrf
-      <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-      <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">チケットを利用（自分のメールに送信）</button>
-    </form>
+    @if($ticket->use != 2)
+        <form method="GET" action="{{ route('ticket_mailform') }}">
+          @csrf
+          <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+          <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">チケットを利用（自分のメールに送信）</button>
+        </form>
+      @endif
+    </div>
   </div>
 @endforeach
 

@@ -7,6 +7,21 @@
  
 <header>
 @include('components.supheader')
+<nav class="bg-gray-800">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+          <!-- ロゴ -->
+          <!-- ナビゲーションメニュー -->
+          <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="hidden sm:block sm:ml-6">
+              <div class="flex space-x-4">
+                <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ホームに戻る</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 </header>
 
  <!--全エリア[START]-->
@@ -117,25 +132,33 @@
                 <h2 class="text-xl font-semibold mb-2">{{ $ticket->gift_sender }}</h2>
                 <p class="text-lg font-medium mb-2">{{ $ticket->product->product_name }}-{{ $ticket->product->price }}円</p>
                 <p class="text-lg font-medium mb-2">エリア:{{ $ticket->area->pref_name }}</p>
-                <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->giftcard->card_name }}" class="h-32 w-auto mb-2">
-                <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                @if ($ticket->use == 1)
-                        ステータス:取得済
+                 @if (is_object($ticket) && is_object($ticket->giftcard))
+                    <div class="card">
+                        <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->giftcard->card_name }}" class="h-32 w-auto mb-2">
+                    </div>
+                @endif
+                <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium @if ($ticket->use == 1) bg-green-500 text-white @elseif ($ticket->use == 2) bg-red-500 text-white @endif">
+                    ステータス： 
+                    @if ($ticket->use == 1)
+                        取得済
                     @elseif ($ticket->use == 2)
-                        ステータス:利用済
-                    @else ステータス:
+                        利用済
+                    @else
+                        未使用
                     @endif
                 </div>
-                <p class="text-lg font-medium mb-2">メッセージ: {{ mb_substr($ticket->message, 0, 20) }}</p>
-                <div class="flex">
-                    <a href="{{ route('supticket_edit', $ticket->id)}}" class="mr-2 text-blue-500 hover:text-blue-700">編集</a>
-                    <form action="{{ route('supticket_delete',  ['ticket' => $ticket->id]) }}" method="POST" onsubmit="return confirm('本当に削除してよろしいですか？');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">削除</button>
-                    </form>
+                 <p class="text-lg font-medium mb-2">メッセージ: {{ mb_substr($ticket->message, 0, 20) }}</p>
+                 @if ($ticket->use == 0)
+                    <div class="flex">
+                        <a href="{{ route('supticket_edit', $ticket->id)}}" class="mr-2 text-blue-500 hover:text-blue-700">編集</a>
+                        <form action="{{ route('supticket_delete',  ['ticket' => $ticket->id]) }}" method="POST" onsubmit="return confirm('本当に削除してよろしいですか？');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700">削除</button>
+                        </form>
+                    </div>
+                    @endif
                 </div>
-            </div>
             @if ($loop->iteration % 8== 0)
                 </div>
                 <div class="flex flex-wrap">

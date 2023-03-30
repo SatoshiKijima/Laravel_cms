@@ -45,9 +45,8 @@ Route::post('/supuser_register', [SupportRegisteredUserController::class, 'store
     ->middleware('guest');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');})->name('welcome');
+
 Route::get('/usergate', [UserGateController::class, 'index'])->name('giftcards_index');
 
 
