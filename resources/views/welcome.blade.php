@@ -13,40 +13,30 @@
 
         <!-- Styles -->
          <header class="text-gray-600 body-font">
-          <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-              <a class="mr-5 hover:text-gray-900">About us</a>
-              <a class="mr-5 hover:text-gray-900">みらいチケットとは</a>
-              <a class="mr-5 hover:text-gray-900">Blog</a>
-            </nav>
-            <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
-                <img alt="logo" class="h-12 w-10" src="{{ url('/storage/images/logo.png') }}">
-                <span class="ml-3 text-xl text-center">みらいチケット<br>Pocket Gift（ポケギフ)</span>
-            </a>
-            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-                @auth
-                    <a href="{{ route('support_home') }}" class="inline-flex items-left bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ユーザーホーム</a>
-                @endauth
-            </div>
-          </div>
-        </header>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('supportuser_login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-                <a href="{{ route('support_home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ユーザーホーム</a>
-            @else
-                <a href="{{ route('supportuser_login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a>
-                @if (Route::has('supuser_register'))
-                    <a href="{{ route('supuser_register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">ユーザー登録</a>
-                @endif
-            @endauth
-        </div>
-    @endif
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+      <a class="mr-5 hover:text-gray-900">About us</a>
+      <a class="mr-5 hover:text-gray-900">みらいチケットとは</a>
+      <a class="mr-5 hover:text-gray-900">Blog</a>
+    </nav>
+    <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
+        <img alt="logo" class="h-12 w-10" src="{{ url('/storage/images/logo.png') }}">
+        <span class="ml-3 text-xl text-center">みらいチケット<br>Pocket Gift（ポケギフ)</span>
+    </a>
+    <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+        @auth
+            <a href="{{ route('support_home') }}" class="inline-flex items-left bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ユーザーホーム</a>
+        @endauth
+        <a href="{{ route('supportuser_login') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a>
+        @if (Route::has('supuser_register'))
+            <a href="{{ route('supuser_register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">ユーザー登録</a>
+        @endif
+    </div>
+  </div>
+</header>
 
 <section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-col">
+  <div class="container px-5 py-10 mx-auto flex flex-col">
     <div class="lg:w-4/6 mx-auto">
       <div class="overflow-hidden">
         <img alt="content" class="object-cover object-center h-full w-full" src="{{ url('/storage/images/ticket_img.jpg') }}">

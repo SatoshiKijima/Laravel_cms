@@ -6,35 +6,54 @@
 <html lang="ja">
   
 <header>
-@include('components.supheader')
-<nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-          <!-- ロゴ -->
-          <!-- ナビゲーションメニュー -->
-          <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="hidden sm:block sm:ml-6">
-              <div class="flex space-x-4">
-                <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケット作成</a>
-                <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ボランティア活動検索</a>
-                <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">クラウドファンディング作成</a>
-              </div>
-            </div>
+  @include('components.supheader')
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+        <!-- ロゴ --> 
+        <!-- ナビゲーションメニュー -->
+        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="sm:hidden">
+            <button type="button" class="block text-gray-300 hover:text-white focus:text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" id="mobile-menu-button">
+              <span class="sr-only">Toggle menu</span>
+              <!-- このアイコンは好みに応じて変更してください -->
+              <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path class="hidden" fill-rule="evenodd" clip-rule="evenodd" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+                <path class="block" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
+    <!-- スマホ用メニュー -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="flex flex-col justify-center items-center">
+        <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">みらいチケット作成</a>
+        <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ボランティア活動検索</a>
+        <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">クラウドファンディングを作成</a>
+      </div>
+    </div>
+  </nav>
 </header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+    mobileMenuButton.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
 
 <body>
    <!--BootstrapのJavaScriptを読み込み-->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  
-    <div class="nav-wrapper container">
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
+
 </nav>
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -47,39 +66,30 @@
             <a href="/supuser/suptickets" id="download-button" class="btn-large waves-effect waves-light orange">みらいチケット始める</a>
         </div>
         <br><br>
-
     </div>
 </div>
-
-
 <div class="container">
     <div class="section">
-
-        <!--   Icon Section   -->
+        <!-- Icon Section -->
         <div class="row">
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">email</i></h2>
-                    
                     <h5 class="center"><a href="/supuser/suptickets" id="download-button" class="btn-large waves-effect waves-light orange">みらいチケット</a></h5>
                     <p class="light">少額500円から提供する商品をご希望の地域、支援したいユーザーを選択して提供することができます。チケットにはメッセージを添えることが出来ます。支援を受けたユーザーから喜びのメッセージが届き支援の先まで見届けることが出来るサービスです</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
                     <h5 class="center">ボランティアに参加</h5>
-
-                    <p class="light">B＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊</p>
+                    <p class="light">B＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
                     <h5 class="center">クラウドファンディングを作成</h5>
-
                     <p class="light">B＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊</p>
                 </div>
             </div>
