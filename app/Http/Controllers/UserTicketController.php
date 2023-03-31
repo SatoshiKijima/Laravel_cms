@@ -65,9 +65,15 @@ class UserTicketController extends Controller
      * @param  \App\Models\UserTicket  $userTicket
      * @return \Illuminate\Http\Response
      */
-    public function show(UserTicket $userTicket)
-    {
-        return view('ticketdetail');
+    public function show(Ticket $ticket)
+    {   
+        return view('showticket', [
+            'image_url' => $ticket->giftcard->image_url,
+            'gift_sender' => $ticket->gift_sender,
+            'product_name' => $ticket->product->product_name,
+            'price' => $ticket->product->price,
+            'message' => $ticket->message,
+        ]);
     }
 
     /**

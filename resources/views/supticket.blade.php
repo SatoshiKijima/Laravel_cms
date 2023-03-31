@@ -151,13 +151,14 @@
                  @if ($ticket->use == 0)
                     <div class="flex">
                         <a href="{{ route('supticket_edit', $ticket->id)}}" class="mr-2 text-blue-500 hover:text-blue-700">編集</a>
-                        <form action="{{ route('supticket_delete',  ['ticket' => $ticket->id]) }}" method="POST" onsubmit="return confirm('本当に削除してよろしいですか？');">
+                        <form id="delete-form" action="{{ route('supticket_delete', ['ticket' => $ticket->id]) }}" method="POST" onsubmit="return confirm('本当に削除してよろしいですか？');">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $ticket->id }}">
                             <button type="submit" class="text-red-500 hover:text-red-700">削除</button>
                         </form>
                     </div>
-                    @endif
+                @endif
                 </div>
             @if ($loop->iteration % 8== 0)
                 </div>
@@ -178,3 +179,10 @@
 
 </div>
  <!--全エリア[END]-->
+ 
+ 
+<script>
+document.getElementById("delete-form").addEventListener("submit", function (event) {
+  console.log("Form submitted.");
+});
+</script>

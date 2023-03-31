@@ -4,16 +4,15 @@
 <header class="text-gray-600 body-font">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        <img alt="logo" class="h-12 w-10" src="{{ url('/storage/images/logo.png') }}">
       </svg>
-      <span class="ml-3 text-xl">Tailblocks</span>
+      <span class="ml-3 text-xl">ポケットギフト</span>
     </a>
     <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900">First Link</a>
-      <a class="mr-5 hover:text-gray-900">Second Link</a>
-      <a class="mr-5 hover:text-gray-900">Third Link</a>
-      <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+      <a class="mr-5 hover:text-gray-900">みらいチケットとは</a>
+      <a class="mr-5 hover:text-gray-900">利用方法</a>
+      <a class="mr-5 hover:text-gray-900">About us</a>
+      <a class="mr-5 hover:text-gray-900">応援する</a>
     </nav>
       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
       </svg>
@@ -25,7 +24,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        <a href="{{ url('/user/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">マイページ</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ログイン</a>
                         @if (Route::has('register'))
@@ -51,47 +50,36 @@
 </section>
 
 <section class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-wrap">
+  <div class="container px-5 py-15 mx-auto flex flex-wrap">
     <div class="lg:w-2/3 mx-auto">
-      <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
-        <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/820x340">
+       <div class="flex flex-wrap w-full py-20 px-10 relative mb-8">
+        <img alt="content" class="object-cover object-center h-full w-full mr-10" src="{{ url('/storage/images/usergate.img.jpg') }}">
         <div class="text-center relative z-10 w-full">
-          <h2 class="text-2xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-          <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-          <a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </a>
+          <h2 class="text-2xl text-gray-900 font-medium title-font mb-2"><br>-支援サービス内容-</h2>
         </div>
       </div>
       <div class="flex flex-wrap -mx-2">
-        <div class="px-2 w-1/2">
-          <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x460">
+      <div class="px-2 w-full md:w-1/2">
+        <a href="{{ Auth::check() ? '/user/home' : '/login' }}" class="block relative">
+          <div class="flex flex-wrap w-full  sm:py-24 py-16 sm:px-10 px-6 relative">
+            <img alt="gallery" class="w-full h-full object-cover object-center block absolute inset-0" style="object-fit: cover" src="{{ url('/storage/images/miraiticket.jpg') }}">
             <div class="text-center relative z-10 w-full">
-              <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-              <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-              <a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
-          </div>
-        </div>
-        <div class="px-2 w-1/2">
-          <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x420">
+          </div> 
+          <div class="mt-3 text-yellow-500 text-center">みらいチケット</div>
+        </a>
+      </div>
+      <div class="px-2 w-full md:w-1/2">
+        <a href="{{ Auth::check() ? '/user/home' : '/login' }}" class="block relative">
+          <div class="flex flex-wrap w-full  sm:py-24 py-16 sm:px-10 px-6 relative">
+            <img alt="gallery" class="w-full h-full object-cover object-center block absolute inset-0" style="object-fit: cover" src="{{ url('/storage/images/infoshare.jpg') }}">
             <div class="text-center relative z-10 w-full">
-              <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-              <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-              <a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
+          </div> 
+          <div class="mt-3 text-yellow-500 text-center">情報サービス</div>
+        </a>
+      </div>
+    </div>
           </div>
         </div>
       </div>
@@ -99,9 +87,12 @@
   </div>
 </section>
 <section class="text-gray-600 body-font">
+  
+ 
   <div class="container px-5 py-24 mx-auto flex flex-wrap">
     <div class="flex flex-wrap w-full">
       <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+         <h3 class="text-2xl text-gray-900 font-medium item-center  title-font mb-2"><br>-みらいチケットの利用方法-</h2><br>
         <div class="flex relative pb-12">
           <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
             <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -113,7 +104,7 @@
           </div>
           <div class="flex-grow pl-4">
             <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
-            <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+            <p class="leading-relaxed">ユーザー登録する、該当の地域に対してみらいチケットの支援者から発行されています</p>
           </div>
         </div>
         <div class="flex relative pb-12">
@@ -127,7 +118,7 @@
           </div>
           <div class="flex-grow pl-4">
             <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
-            <p class="leading-relaxed">Vice migas literally kitsch +1 pok pok. Truffaut hot chicken slow-carb health goth, vape typewriter.</p>
+            <p class="leading-relaxed">みらいチケット掲示板からチケットを取得します</p>
           </div>
         </div>
         <div class="flex relative pb-12">
@@ -142,7 +133,7 @@
           </div>
           <div class="flex-grow pl-4">
             <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
-            <p class="leading-relaxed">Coloring book nar whal glossier master cleanse umami. Salvia +1 master cleanse blog taiyaki.</p>
+            <p class="leading-relaxed">取得したチケットを自分のメールアドレスに送ります</p>
           </div>
         </div>
         <div class="flex relative pb-12">
@@ -157,7 +148,7 @@
           </div>
           <div class="flex-grow pl-4">
             <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 4</h2>
-            <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+            <p class="leading-relaxed">受け取ったメールのQRコードを使って、飲食時の食事に利用します</p>
           </div>
         </div>
         <div class="flex relative">
@@ -169,7 +160,7 @@
           </div>
           <div class="flex-grow pl-4">
             <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">FINISH</h2>
-            <p class="leading-relaxed">Pitchfork ugh tattooed scenester echo park gastropub whatever cold-pressed retro.</p>
+            <p class="leading-relaxed">利用後、チケットを支援してくださった方にお礼のメッセージを送ってください。支える側も喜びとこれからの活力となります。</p>
           </div>
         </div>
       </div>
@@ -182,8 +173,8 @@
   <div class="container px-5 py-24 mx-auto flex flex-wrap">
     <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
       <div class="w-full sm:p-4 px-4 mb-6">
-        <h1 class="title-font font-medium text-xl mb-2 text-gray-900">Moon hashtag pop-up try-hard offal truffaut</h1>
-        <div class="leading-relaxed">Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar neutra sustainable fingerstache kickstarter.</div>
+        <h1 class="title-font font-medium text-xl mb-2 text-gray-900">これまでの利用いただいたチケットのデータ</h1>
+        <div class="leading-relaxed">*************************************************************************************************.</div>
       </div>
       <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
         <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
@@ -208,109 +199,10 @@
   </div>
 </section>
 <footer class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
-      </div>
-      <div class="lg:w-1/6 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">First Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-          </li>
-          <li>
-            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-          </li>
-        </nav>
+  <div class="container px-5 py-15 mx-auto flex flex-wrap">
+    <div class="lg:w-2/3 mx-auto">
+       <div class="flex flex-wrap w-full py-20 px-10 relative mb-8">
+        <img alt="content" class="object-cover object-center h-full w-full mr-10" src="{{ url('/storage/images/usergatefooter.jpg') }}">
       </div>
     </div>
   </div>

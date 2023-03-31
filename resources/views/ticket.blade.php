@@ -19,6 +19,7 @@
     </nav>
     </header>
     
+  
 
 <div class="bg-gray-200 py-8">
   <div class="text-center text-3xl font-bold mb-4">みらいチケット掲示板<br>皆さんから暖かい支援のチケットです</div>
@@ -45,7 +46,7 @@
                                             <span class="ml-2">{{ $ticket->product->product_name }}</span>
                                             <input type="radio" name="ticket_id" value="{{ $ticket->id }}" class="form-radio">
                                         </label>
-                                        <a href="{{ route('ticket_show', $ticket) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">詳細を見る</a>
+                                        <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full" data-modal-target="modal">詳細を見る</a>
                                     </div>
                                 </div>
                             </div>
@@ -55,5 +56,38 @@
                 </div>
              </div>
         </form>
+
+
+<!-- モーダル用のHTML要素 -->
+<div class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center hidden" id="modal">
+    <div class="ticket-container max-w-md bg-white rounded-lg shadow-lg">
+        <div class="ticket-info p-4">
+            <p class="font-bold">{{ $ticket->gift_sender }}さんからのみらいチケット(PokeGif)</p>
+            <img src="{{ $ticket->giftcard->image_url }}" alt="{{ $ticket->product_name }}" class="h-64 w-full object-cover rounded-lg shadow-lg mt-4">
+            <p class="border-2 border-pink-500 p-4 my-4 break-all">応援メッセージ：<br>{{ $ticket->message }}</p>
+            <p class="font-bold text-xl text-pink-500 mb-2">{{ $ticket->product_name }}</p>
+            <p class="text-pink-500 text-xl mb-2">みらいチケット：{{ $ticket->price }}円</p>
+            <p class="text-gray-500 limit-date">有効期限: 取得日から3カ月</p>
+            <div class="flex justify-end mt-8">
+                <button class="bg-pink-500 text-white font-bold py-2 px-4 rounded-full mr-4" id="close-modal-button">閉じる</button>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    const openModalButtons = document.querySelectorAll('[data-modal-target]');
+    const closeModalButton = document.getElementById('close-modal-button');
+    const modal = document.getElementById('modal');
+
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modalTarget = button.dataset.modalTarget;
+            document.getElementById(modalTarget).classList.remove('hidden');
+        });
+    });
+
+    closeModalButton.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+</script>
 

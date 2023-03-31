@@ -28,7 +28,7 @@ class TicketController extends Controller
             $tickets = Ticket::with(['product', 'area', 'giftcard'])
             ->where('support_user_id', $user->id) // ログインユーザーのチケットのみ取得
             ->orderBy('created_at', 'asc')
-            ->paginate(16);
+            ->paginate(8);
             
             // dd(auth('supportusers')->user());
             return view('supticket', [
@@ -110,7 +110,9 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        return view('showticket', [
+        'ticket' => $ticket,
+        ]);
     }
 
     /**
@@ -176,10 +178,17 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
     {
-        $ticket->delete();       //追加
-        return redirect()->route('supticket_index')->with('success', 'チケットを削除しました。');  //追加
+        $ticket = Ticket::find($id);
+    
+        if (!$ticket) {
+            return redirect()->route('supticket_index')->with('error', 'チケットが見つかりませんでした。');
+        }
+    
+        $ticket->delete();
+    
+        return redirect()->route('supticket_index')->with('success', 'チケットを削除しました。');
     }
     
     public function get(Request $request)
@@ -225,7 +234,7 @@ class TicketController extends Controller
                       ->whereIn('use', [1, 2]);
             })
             ->orderBy('created_at', 'asc')
-            ->paginate(16);
+            ->paginate(8);
     
         return view('myticket', [
             'tickets' => $tickets,
