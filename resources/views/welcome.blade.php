@@ -21,7 +21,7 @@
     </nav>
     <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
         <img alt="logo" class="h-12 w-10" src="{{ url('/storage/images/logo.png') }}">
-        <span class="ml-3 text-xl text-center">みらいチケット<br>Pocket Gift（ポケギフ)</span>
+        <span class="ml-3 text-xl text-center">みらいチケット<br>Pocket Gift（ポケットギフト)</span>
     </a>
     <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
         @auth

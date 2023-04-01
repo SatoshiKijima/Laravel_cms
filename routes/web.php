@@ -63,9 +63,9 @@ Route::middleware(['auth:supportusers', 'supportuser', 'supportuser'])->group(fu
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         if (Auth::user()->is_support) {
-            return view('support_dashboard');
+            return view('welcome');
         } else {
-            return view('dashboard');
+            return view('usergate');
         }
     })->name('dashboard');
     
@@ -89,7 +89,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout')
+        ->middleware('web','auth:supportusers')
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])
+        ->middleware('signed');
+    
+    Route::middleware(['guest:supportusers'])->group(function () {
+        Route::get('/suplogin', [SupportUserLoginController::class, 'create'])->name('supportuser_login');
+        Route::post('/suplogin', [SupportUserLoginController::class, 'store']);
+    });
 
 
 // 支援ユーザーみらいチケット用のルート

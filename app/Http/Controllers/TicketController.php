@@ -28,7 +28,7 @@ class TicketController extends Controller
             $tickets = Ticket::with(['product', 'area', 'giftcard'])
             ->where('support_user_id', $user->id) // ログインユーザーのチケットのみ取得
             ->orderBy('created_at', 'asc')
-            ->paginate(8);
+            ->paginate(10);
             
             // dd(auth('supportusers')->user());
             return view('supticket', [

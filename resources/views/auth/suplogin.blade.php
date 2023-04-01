@@ -49,10 +49,10 @@
 @if (Route::has('supportuser_login'))
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
         @auth
-            <a href="{{ route('support_home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">ユーザーホーム</a>
+            <a href="{{ route('support_home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">-ユーザーホーム-</a>
         @else
-            <a href="{{ route('supuser_register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">ユーザー登録</a>
-            <a href="{{ route('welcome') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">みらいチケットTOPに戻る</a>
+            <a href="{{ route('supuser_register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">-支援ユーザー登録-</a>
+            <a href="{{ route('welcome') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">-みらいチケットTOPに戻る-</a>
         @endauth
     </div>
 @endif

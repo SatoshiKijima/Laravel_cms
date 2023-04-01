@@ -6,33 +6,60 @@
 <html lang="ja">
   
 <header>
-@include('components.supheader')
-<nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-          <!-- ロゴ -->
-          <!-- ナビゲーションメニュー -->
-          <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div class="hidden sm:block sm:ml-6">
-              <div class="flex space-x-4">
-                <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ホームに戻る</a>
-                <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケット作成</a>
+  @include('components.supheader')
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+        <!-- ロゴ -->
+        <!-- ハンバーガーメニュー -->
+        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="sm:hidden">
+            <button type="button" class="block text-gray-300 hover:text-white focus:text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" id="mobile-menu-button">
+              <span class="sr-only">Toggle menu</span>
+            <!-- ハンバーガーアイコン -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        <!-- ナビゲーションメニュー -->
+        <div class="hidden sm:block sm:ml-6">
+          <div class="flex space-x-4">
+                <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ホームに戻る</a>
+                <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">みらいチケット作成</a>
               </div>
-            </div>
-          </div>
         </div>
       </div>
-    </nav>
+      </div>
+    </div>
+
+    <!-- モバイル用のナビゲーションメニュー -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ホームに戻る</a>
+                <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">みらいチケット作成</a>
+          </div>
+    </div>
+  </nav>
 </header>
-</header>
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton.addEventListener('click', function() {
+    const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+    mobileMenuButton.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+          
  <!--全エリア[START]-->
-    <div class="flex bg-gray-100">
+    <div class="flex bg-gray-100 justify-center">
 
         <!--左エリア[START]--> 
-        <div class="text-gray-700 text-left px-4 py-4 m-2">
-            
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-500 font-bold">
+        <div class="text-gray-700 text-center px-4 py-4 m-2">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 bg-white border-b border-gray-500 font-bold">
                     みらいチケット更新管理
                 </div>
             </div>
@@ -124,10 +151,7 @@
     </div>
         <!--左エリア[END]--> 
         
-         <!--右側エリア[START]--><div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
-      
-                                </div>
-    
+         <!--右側エリア[START]-->
     <!-- 現在のチケット -->
    
 
