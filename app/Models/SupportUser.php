@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Ticket;
 
 
 class SupportUser extends Authenticatable
@@ -46,5 +47,24 @@ class SupportUser extends Authenticatable
     public function family()
     {
        return $this->belongsToMany(User::class);
+    }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    
+    public function supportedTicketCount()
+    {
+        return $this->tickets()->count();
+    }
+    
+    public function supportedTicketTotalPrice()
+    {
+        return $this->tickets()->sum('price');
+    }
+    
+    public function supportedUsedTicketCount()
+    {
+        return $this->tickets()->where('use', 2)->count();
     }
 }

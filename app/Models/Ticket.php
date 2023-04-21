@@ -11,12 +11,15 @@ use App\Models\Prefecture;
 use App\Models\GiftCard;
 use App\Models\Product;
 use App\Models\UserTicket;
+use App\Models\SupportUser;
+use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Thanks;
 
 
 class Ticket extends Model
 {
-    
+    const USED = 2;
     protected $with = ['product'];
     
     public function product()
@@ -48,4 +51,13 @@ class Ticket extends Model
     {
         return $this->hasMany('App\Models\UserTicket');
     }
+    public function thanks()
+  {
+        return $this->hasOne(Thanks::class);
+  }
+    public function supportUser()
+  {
+        return $this->hasMany(User::class, 'support_user_id');
+  }
+    
 }

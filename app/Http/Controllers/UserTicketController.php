@@ -16,11 +16,11 @@ class UserTicketController extends Controller
     public function index(Request $request)
     {
         $tickets = Ticket::with(['product', 'area', 'giftcard'])
-        ->orderBy('created_at', 'desc')
-        ->paginate(12);
-        return view('ticket', ['tickets' => $tickets]);
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(12);
+        $gift_sender = '例:太郎さん';
+        return view('ticket', compact('tickets', 'gift_sender'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

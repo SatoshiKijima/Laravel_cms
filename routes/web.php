@@ -16,6 +16,7 @@ use App\Http\Controllers\UserTicketController;
 use App\Http\Controllers\Auth\SupportUserLoginController;
 use App\Http\Middleware\SupportUserMiddleware;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\ThanksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // 支援ユーザーみらいチケット用のルート
 
+Route::middleware(['auth:supportusers'])->group(function () {
+    Route::get('/supuser/suptickets', [TicketController::class, 'index'])->name('supticket_index');
+    Route::get('/supuser/suptickets/arigato', [TicketController::class, 'thanksticket'])->name('supticket_thanks');
+    Route::get('/supuser/suptickets/summary',[TicketController::class,"show"])->name('supticket_summary'); //通常
+});
 
 
 Route::resource('/supuser/suptickets', TicketController::class)->names([
@@ -114,6 +120,9 @@ Route::post('/supuser/suptickets/edit/{ticket}',[TicketController::class,"edit"]
 Route::get('/supuser/suptickets/edit/{ticket}',[TicketController::class,"edit"])->name('supticket_editor'); //通常
 Route::post('/supuser/suptickets/update',[TicketController::class,"update"])->name('supticket_update');
 Route::delete('/supuser/suptickets/{ticket}', [TicketController::class, "destroy"])->name('supticket_delete')->where('ticket', '[0-9]+');
+
+
+
 Route::get('/user/myticket', [TicketController::class, "myticket"])->name('myticket_index');
 Route::post('user//myticket/use/{ticket}', [TicketController::class, "useTicket"])->name('myticket_use');
 Route::post('user//myticket/used/{ticket}', [TicketController::class, "usedTicket"])->name('myticket_used');
@@ -153,5 +162,8 @@ Route::post('/user/myticket/email/content', [TicketSendController::class, 'ticke
 
 
 Route::get('/qrcode', [QrCodeController::class, 'index']);
+
+Route::post('/user/myticket/thanks', [ThanksController::class, 'sendThanks'])->name('send_thanks');
+
 
 require __DIR__.'/auth.php';

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\UserTicket;
+use App\Models\Ticket;
+use App\Models\Thanks;
 
 
 class User extends Authenticatable
@@ -47,4 +50,14 @@ class User extends Authenticatable
     {
        return $this->belongsToMany(User::class);
     }
+    
+    public function thanks()
+  {
+    return $this->hasMany(Thanks::class);
+  }
+
+  public function tickets()
+  {
+    return $this->hasMany(Ticket::class);
+  }
 }

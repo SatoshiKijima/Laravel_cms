@@ -10,28 +10,36 @@
   <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
-        <!-- ロゴ --> 
-        <!-- ナビゲーションメニュー -->
+        <!-- ロゴ -->
+        <!-- ハンバーガーメニュー -->
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="sm:hidden">
             <button type="button" class="block text-gray-300 hover:text-white focus:text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu" id="mobile-menu-button">
               <span class="sr-only">Toggle menu</span>
-              <!-- このアイコンは好みに応じて変更してください -->
-              <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path class="hidden" fill-rule="evenodd" clip-rule="evenodd" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-                <path class="block" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/>
-              </svg>
-            </button>
+            <!-- ハンバーガーアイコン -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        <!-- ナビゲーションメニュー -->
+        <div class="hidden sm:block sm:ml-6">
+          <div class="flex space-x-4">
+            <a href="/supuser/suptickets/arigato" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">利用されたみらいチケット一覧</a>
+            <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケットを発行する</a>
+            <a href="/supuser/suptickets/summary" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケット履歴</a>
           </div>
         </div>
       </div>
+      </div>
     </div>
-    <!-- スマホ用メニュー -->
+
+    <!-- モバイル用のナビゲーションメニュー -->
     <div class="sm:hidden" id="mobile-menu">
-      <div class="flex flex-col justify-center items-center">
-        <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">みらいチケット作成</a>
-        <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ボランティア活動検索</a>
-        <a href="" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">クラウドファンディングを作成</a>
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="/supuser/suptickets/arigato" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">利用されたみらいチケット一覧</a>
+        <a href="/supuser/suptickets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケットを発行する</a>
+        <a href="/supuser/suptickets/summary" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケット履歴</a>
       </div>
     </div>
   </nav>

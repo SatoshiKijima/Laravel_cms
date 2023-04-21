@@ -38,7 +38,7 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-10 mx-auto flex flex-col">
     <div class="lg:w-4/6 mx-auto">
-      <div class="overflow-hidden">
+      <div class="overflow-hidden max-w-full">
         <img alt="content" class="object-cover object-center h-full w-full" src="{{ url('/storage/images/ticket_img.jpg') }}">
       </div>
       <div class="flex flex-col sm:flex-row mt-10">

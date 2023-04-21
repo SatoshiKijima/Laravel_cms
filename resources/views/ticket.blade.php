@@ -21,6 +21,7 @@
             <div class="flex space-x-4">
               <a href="/user/myticket" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">マイチケット</a>
               <a href="/user/tickets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">みらいチケット掲示板</a>
+              <a href="/user/home" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">マイページホーム</a>
             </div>
           </div>
         </div>
@@ -31,6 +32,7 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a href="/user/myticket" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">マイチケット</a>
         <a href="/user/tickets" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">みらいチケット掲示板</a>
+        <a href="/user/home" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">マイページホーム</a>
       </div>
     </div>
   </nav>
@@ -88,7 +90,7 @@
 <div class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center hidden" id="modal">
     <div class="ticket-container max-w-md bg-white rounded-lg shadow-lg">
         <div class="ticket-info p-4">
-            <p class="font-bold" id="gift-sender"></p>
+            <p class="font-bold" id="gift-sender">{{ $gift_sender }}さんからのみらいチケット</p>
             <img src="" alt="" class="h-64 w-full object-cover rounded-lg shadow-lg mt-4" id="gift-card-image">
             <p class="border-2 border-pink-500 p-4 my-4 break-all" id="message">応援メッセージ：<br>{{ $ticket->message }}</p>
             <p class="font-bold text-xl text-pink-500 mb-2" id="product-name"></p>

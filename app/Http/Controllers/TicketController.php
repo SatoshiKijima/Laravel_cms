@@ -9,6 +9,9 @@ use App\Models\GiftCard;
 use Auth;
 use Validator;
 use App\Models\UserTicket;
+use App\Http\Controllers\ThanksController;
+use App\Models\SupportUser;
+
 
 
 class TicketController extends Controller
@@ -108,12 +111,30 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket $ticket)
+    public function show(SupportUser $supportUser)
     {
-        return view('showticket', [
-        'ticket' => $ticket,
-        ]);
+        $supportUserId = Auth::guard('supportusers')->user()->id;
+        $tickets = Ticket::select('tickets.*', 'products.price')
+            ->join('products', 'tickets.product_id', '=', 'products.id')
+            ->where('support_user_id', $supportUserId)
+            ->get();
+        $ticketCount = $tickets->count();
+        $totalPrice = $tickets->sum('price');
+        $usedCount = $tickets->where('use', Ticket::USED)->count();
+        
+        $giftcard_images = [
+          asset('/storage/images/hana1.png'),
+          asset('/storage/images/hana2.png'),
+          asset('/storage/images/hana3.png'),
+          asset('/storage/images/hana4.png'),
+          asset('/storage/images/hana5.png')
+        ];
+        $selected_images = collect($giftcard_images)->random(5);
+        
+        return view('summary', compact('supportUser', 'tickets', 'ticketCount', 'totalPrice', 'usedCount', 'selected_images'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -276,4 +297,35 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'チケットが見つかりませんでした。');
         }
     }
+    public function thanksticket(Request $request)
+        {   
+            // dd(auth('supportusers')->user());//ユーザーメソッド/
+            $user = auth('supportusers')->user(); // ログインユーザーの取得
+            $products = DB::table('products')->select('id', 'product_name','price')->get();
+            $prefectures = DB::table('prefectures')->select('id', 'pref_name')->get();
+            $giftcards = GiftCard::all();
+            
+            // withメソッドでthanksリレーションを追加
+            $tickets = Ticket::with(['product', 'area', 'giftcard', 'thanks'])
+                        ->where('support_user_id', $user->id) // ログインユーザーのチケットのみ取得
+                        ->where('use', 2) // 利用済のチケットのみ取得
+                        ->orderBy('created_at', 'asc')
+                        ->paginate(10);
+            
+            foreach ($tickets as $ticket) {
+                if ($ticket->thanks) {
+                    $thanks[$ticket->id] = $ticket->thanks->first();
+                }
+            }
+
+
+            
+            return view('arigato', [
+                'tickets' => $tickets,
+                'products' => $products,
+                'prefectures' => $prefectures,
+                'giftcards' => $giftcards,
+                'thanks' => $thanks,
+            ]);
+  }
 }

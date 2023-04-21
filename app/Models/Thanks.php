@@ -2,8 +2,17 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Prefecture;
+use App\Models\GiftCard;
+use App\Models\Product;
+use App\Models\UserTicket;
+use App\Models\User;
+use App\Models\SupportUser;
+use App\Models\Ticket;
+
 
 class Thanks extends Model
 {
@@ -21,7 +30,7 @@ class Thanks extends Model
 
     public function ticket()
     {
-        return $this->belongsTo(Ticket::class);
+        return $this->belongsTo(Ticket::class, 'ticket_id');
     }
 
     public function user()
@@ -31,6 +40,8 @@ class Thanks extends Model
 
     public function supportUser()
     {
-        return $this->belongsTo(User::class, 'support_user_id');
+        return $this->belongsTo(SupportUser::class, 'support_user_id');
     }
+    
+    
 }

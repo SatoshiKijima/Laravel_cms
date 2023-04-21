@@ -26,6 +26,7 @@
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ホームに戻る</a>
+            <a href="/supuser/suptickets/arigato" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">利用されたみらいチケット一覧</a>
           </div>
         </div>
       </div>
@@ -36,6 +37,7 @@
     <div class="sm:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a href="/support/home" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ホームに戻る</a>
+        <a href="/supuser/suptickets/arigato" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">利用されたみらいチケット一覧</a>
       </div>
     </div>
   </nav>

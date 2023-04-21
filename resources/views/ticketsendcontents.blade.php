@@ -33,7 +33,7 @@
 
 <body class="bg-gray-100">
      <div class="max-w-md mx-auto mt-10">
-        <h1 class="bg-pink-500 text-white font-bold text-2xl p-4 rounded-t-lg text-center">みらいチケットをメール送信しました</h1>
+        <h1 class="bg-pink-500 text-white font-bold text-2xl p-4 rounded-t-lg text-center">みらいチケットを送信しました</h1>
         <div class="ticket-container bg-white rounded-lg shadow-lg mt-4">
             <div class="ticket-info p-4">
                 <p class="font-bold">{{ $ticket->gift_sender }} さんからのみらいチケット(PokeGif)</p>
